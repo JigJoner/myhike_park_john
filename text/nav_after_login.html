@@ -2,7 +2,8 @@
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="../images/hikeLogo.png" height="36">
-            John Hikes</a>
+            <span id="enter_username"></span>
+        </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
             data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
             aria-label="Toggle navigation">
@@ -26,3 +27,22 @@
         </div>
     </div>
 </nav>
+
+
+<script>
+    function changeName() {
+    firebase.auth().onAuthStateChanged(user => {
+        // Check if a user is signed in:
+        if (user) {
+            userName = user.displayName;
+            // db.collection("users").doc(user.uid).get().name;
+            //method #1:  insert with JS
+            document.getElementById("enter_username").innerText = userName;    
+            
+        } else {
+            // No user is signed in.
+        }
+    });
+}
+changeName(); //run the function
+</script>
